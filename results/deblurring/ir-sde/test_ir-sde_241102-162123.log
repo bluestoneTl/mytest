@@ -1,0 +1,50 @@
+24-11-02 16:21:23.287 - INFO:   name: ir-sde
+  suffix: None
+  model: denoising
+  distortion: derain
+  gpu_ids: [0]
+  sde:[
+    max_sigma: 10
+    T: 100
+    schedule: cosine
+    eps: 0.005
+  ]
+  degradation:[
+    sigma: 25
+    noise_type: G
+    scale: 4
+  ]
+  datasets:[
+    test1:[
+      name: Val_Dataset
+      mode: LQGT
+      dataroot_GT: /home/username/mywork/image-restoration-sde/datasets/in_image/deblurring/GT
+      dataroot_LQ: /home/username/mywork/image-restoration-sde/datasets/in_image/deblurring/LQ_1k
+      phase: test1
+      scale: 1
+      data_type: img
+    ]
+  ]
+  network_G:[
+    which_model_G: ConditionalUNet
+    setting:[
+      in_nc: 3
+      out_nc: 3
+      nf: 64
+      depth: 4
+    ]
+  ]
+  path:[
+    pretrain_model_G: /home/username/mywork/image-restoration-sde/pretrained/pretrained-deblurring/ir-sde-deblurring.pth
+    root: /home/username/mywork/image-restoration-sde
+    results_root: /home/username/mywork/image-restoration-sde/results/deblurring/ir-sde
+    log: /home/username/mywork/image-restoration-sde/results/deblurring/ir-sde
+  ]
+  is_train: False
+
+24-11-02 16:21:23.288 - INFO: Dataset [LQGTDataset - Val_Dataset] is created.
+24-11-02 16:21:23.288 - INFO: Number of test images in [Val_Dataset]: 3
+24-11-02 16:21:24.585 - INFO: Loading model for G [/home/username/mywork/image-restoration-sde/pretrained/pretrained-deblurring/ir-sde-deblurring.pth] ...
+24-11-02 16:21:24.921 - INFO: Model [DenoisingModel] is created.
+24-11-02 16:21:36.522 - INFO: 
+Testing [Val_Dataset]...
